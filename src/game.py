@@ -1,6 +1,9 @@
+from .window import Window
+
+
 class Game:
     def start(self):
-        print("""
+        screen = """
           ___ .~- ` `' "' ` -~. ____
          :~+.-`  .-"-.  .-"~._  `-.+~:
          !  /  -`     `       `'--~:.l
@@ -25,4 +28,9 @@ class Game:
    /      \ \ .   ___ /\ ___      .//        \
   :        \ \.-`  _.~l)=~  `' -.:"
   `         '/  .    ":`-.       \            :
-          """)
+        """
+        dialog ="Hello, world!"
+
+        window = Window(screen, dialog)
+        window.render()
+        

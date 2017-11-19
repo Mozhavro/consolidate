@@ -4,7 +4,7 @@ class Window:
     Consists of a scene picture frame and dialog
     """
 
-    def __init__(self, frame, dialog):
+    def __init__(self, screen, dialog):
         self.screen = screen
         self.dialog = dialog
 
@@ -18,7 +18,7 @@ class Window:
         self.render_dialog()
 
     def render_screen(self):
-        pass
+        print(self.screen)
 
     def render_dialog(self):
-        pass
+        print(self.dialog)
