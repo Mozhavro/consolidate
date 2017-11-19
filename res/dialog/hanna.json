@@ -1,0 +1,64 @@
+{
+    "statements": [
+        {
+            "id": 1,
+            "remark": "She sits at the stairs with some notebook and headphones on her head. You are come up to her and say:",
+            "text": "",
+            "emotion": "default",
+            "answers": [
+                {
+                    "text": "Hi!",
+                    "next_statement": 2
+                }
+                {
+                    "text": "Hello there!",
+                    "next_statement": 2
+                },
+                {
+                    "text": "Hey, sweety!",
+                    "next_statement": 3
+                },
+                {
+                    "text": "Holy Moly! Be you angel?",
+                    "next_statement": 3
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "remark": "",
+            "text": "Hi!",
+            "emotion": "default",
+            "answers": [
+                {
+                    "text": "My name is %username%",
+                    "next_statement": 4
+                }
+                {
+                    "text": "What is your name?",
+                    "next_statement": 5
+                },
+                {
+                    "text": "what are you listening?",
+                    "next_statement": 6
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "remark": "",
+            "text": "What do you want from me?",
+            "emotion": "annoyed",
+            "answers": [
+                {
+                    "text": "Sorry, I didn't mean it like that. I'm %username%.",
+                    "next_statement": 4
+                },
+                {
+                    "text": "Hey, chill bae",
+                    "next_statement": 7
+                }
+            ]
+        }
+    ]
+}
