@@ -1,3 +1,7 @@
+"""
+Make me executable.
+"""
+
 from .game import Game
 
 
