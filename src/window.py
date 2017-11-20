@@ -45,11 +45,16 @@ class GameFrame(Frame):
             name="answer_options",
             on_change=self._on_pick)
         layout.add_widget(self._answer_options)
+        layout.add_widget(Button("Quit", self._quit))
         self.fix()
         self._on_pick()
 
     def _on_pick(self):
         pass
+
+    @staticmethod
+    def _quit():
+        raise StopApplication("User pressed quit")
 
 
 # class Window:
