@@ -1,16 +1,35 @@
+import sys
+
 from asciimatics.scene import Scene
 from asciimatics.screen import Screen
-from asciimatics.widgets import Frame, Text, Layout
+from asciimatics.widgets import Frame, Text, Layout, ListBox, Widget
 from asciimatics.exceptions import ResizeScreenError
+
+
+class Window:
+    def start(self):
+        while True:
+            try:
+                import pudb; pudb.set_trace()
+                Screen.wrapper(self.play_scenes, catch_interrupt=True, arguments=[None])
+                sys.exit(0)
+            except ResizeScreenError as e:
+                pass
+
+    def play_scenes(self, screen, scene):
+        scenes = [
+            Scene([GameFrame(screen)], -1, name="Main"),
+        ]
+        screen.play(scenes, stop_on_resize=True, start_scene=scene)
 
 
 
 class GameFrame(Frame):
-    def __init__(self, screen, content):
+    def __init__(self, screen, content=None):
         super(GameFrame, self).__init__(screen,
                                         screen.height * 2 // 3,
                                         screen.width * 2 // 3,
-                                        on_load=self._reload_list,
+                                        # on_load=self._reload_list,
                                         hover_focus=True,
                                         title="AGIRL")
         self._content = content
@@ -19,8 +38,14 @@ class GameFrame(Frame):
         self._answer_options = ListBox(
             Widget.FILL_FRAME,
             ['wup', 'dup'],
-            name="contacts",
+            name="answer_options",
             on_change=self._on_pick)
+        layout.add_widget(self._answer_options)
+        self.fix()
+        self._on_pick()
+
+    def _on_pick(self):
+        pass
 
 
 # class Window:
