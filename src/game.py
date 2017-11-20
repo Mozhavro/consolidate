@@ -31,7 +31,7 @@ class Game:
         """
         dialog ="Hello, world!"
 
-        window = Window()
+        window = Window(screen)
         window.start()
         # window = Window(screen, dialog)
         # window.render()

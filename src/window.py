@@ -2,13 +2,14 @@ import sys
 
 from asciimatics.scene import Scene
 from asciimatics.screen import Screen
-from asciimatics.widgets import Frame, Text, Layout, ListBox, Widget, Button
-from asciimatics.exceptions import ResizeScreenError
+from asciimatics.widgets import Frame, Text, Layout, ListBox, Widget, Button, Label, TextBox
+from asciimatics.exceptions import ResizeScreenError, StopApplication
 
 
 class Window:
-    def __init__(self, additional_scenes=None):
+    def __init__(self, picture=None, additional_scenes=None):
         self._additional_scenes = additional_scenes
+        self._picture = picture
 
     def start(self):
         while True:
@@ -20,7 +21,7 @@ class Window:
 
     def play_scenes(self, screen):
         scenes = [
-            Scene([GameFrame(screen)], -1, name="Main"),
+            Scene([GameFrame(screen, self._picture)], -1, name="Main"),
         ]
         if self._additional_scenes: scenes += self._additional_scenes
         
@@ -29,21 +30,30 @@ class Window:
 
 
 class GameFrame(Frame):
-    def __init__(self, screen, content=None):
+    def __init__(self, screen, picture=''):
         super(GameFrame, self).__init__(screen,
-                                        screen.height * 2 // 3,
-                                        screen.width * 2 // 3,
+                                        screen.height * 7 // 8,
+                                        screen.width * 7 // 8,
                                         # on_load=self._reload_list,
                                         hover_focus=True,
                                         title="AGIRL")
-        self._content = content
+
+        # import pudb; pudb.set_trace()
         layout = Layout([1,1,1,1], fill_frame=True)
         self.add_layout(layout)
+
         self._answer_options = ListBox(
             Widget.FILL_FRAME,
             [('1. wup', 1), ('2.dup', 2)],
             name="answer_options",
             on_change=self._on_pick)
+
+        self._picture = TextBox(10)
+        self._picture.disabled = True
+        self._picture.value = picture
+        self.reset()
+
+        layout.add_widget(self._picture)
         layout.add_widget(self._answer_options)
         layout.add_widget(Button("Quit", self._quit))
         self.fix()
