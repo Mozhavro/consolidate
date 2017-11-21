@@ -1,4 +1,5 @@
 import sys
+from collections import defaultdict
 
 from asciimatics.scene import Scene
 from asciimatics.screen import Screen
@@ -32,13 +33,18 @@ class Window:
 class GameFrame(Frame):
     def __init__(self, screen, picture=''):
         super(GameFrame, self).__init__(screen,
-                                        screen.height * 7 // 8,
-                                        screen.width * 7 // 8,
+                                        screen.height,
+                                        screen.width,
                                         # on_load=self._reload_list,
                                         hover_focus=True,
                                         title="AGIRL")
 
-        # import pudb; pudb.set_trace()
+        self.palette = defaultdict(
+            lambda: (Screen.COLOUR_WHITE, Screen.A_NORMAL, Screen.COLOUR_BLACK))
+        for key in ["selected_focus_field", "label"]:
+            self.palette[key] = (Screen.COLOUR_BLACK, Screen.A_BOLD, Screen.COLOUR_WHITE)
+        self.palette["title"] = (Screen.COLOUR_BLACK, Screen.A_NORMAL, Screen.COLOUR_WHITE)
+
         layout = Layout([1,1,1,1], fill_frame=True)
         self.add_layout(layout)
 
@@ -52,6 +58,8 @@ class GameFrame(Frame):
         self._picture.disabled = True
         self._picture.value = picture
         self.reset()
+
+        # import pudb; pudb.set_trace()
 
         layout.add_widget(self._picture)
         layout.add_widget(self._answer_options)
