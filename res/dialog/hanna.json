@@ -9,7 +9,7 @@
                 {
                     "text": "Hi!",
                     "next_statement": 2
-                }
+                },
                 {
                     "text": "Hello there!",
                     "next_statement": 2
@@ -33,7 +33,7 @@
                 {
                     "text": "My name is %username%",
                     "next_statement": 4
-                }
+                },
                 {
                     "text": "What is your name?",
                     "next_statement": 5
