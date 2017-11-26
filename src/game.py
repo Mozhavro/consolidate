@@ -1,6 +1,7 @@
 from .window import Window
 from .dialog import Dialog
 from . import config
+from . import resources
 
 
 class Game:
@@ -41,7 +42,10 @@ class Game:
 class GameModel:
     def __init__(self, config):
         self._partner_name = config.NAME
-        self._statement = 1
+        self._dialog = resources.load_dialog()
 
     def get_statement(id):
-        pass
+        return self.dialog[id]
+
+    def get_scene(title):
+        return resources.get_scene(title)
