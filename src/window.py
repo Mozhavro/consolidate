@@ -25,8 +25,7 @@ class Window:
 
     def play_scenes(self, screen):
         scenes = [
-            Scene([GameFrame(screen, self._picture, x=0, y=0)], -1, name="Controls"),
-            # Scene([Print(screen, StaticRenderer(images=[self._picture]), 0)], name="Picture"),
+            Scene([GameFrame(screen, self._picture)], -1, name="Controls"),
         ]
         if self._additional_scenes: scenes += self._additional_scenes
         
@@ -35,14 +34,10 @@ class Window:
 
 
 class GameFrame(Frame):
-    def __init__(self, screen, picture='', x=None, y=None):
+    def __init__(self, screen, picture=''):
         super(GameFrame, self).__init__(screen,
                                         screen.height,
-                                        screen.width,
-                                        # on_load=self._reload_list,
-                                        hover_focus=True,
-                                        title="AGIRL",
-                                        x=x, y=y)
+                                        screen.width)
 
         self._picture = picture
 
@@ -57,11 +52,11 @@ class GameFrame(Frame):
 
         self._answer_options = ListBox(
             Widget.FILL_FRAME,
-            [('1. wup', 1), ('2.dup', 2)],
+            [('1. wup', 1), ('2.dup', 2), ('2.dup', 3), ('2.dup', 4), ('2.dup', 5), ('2.dup', 6)],
             name="answer_options",
             on_change=self._on_pick)
 
-        self._picture_display = TextBox(14, as_string=True)
+        self._picture_display = TextBox(16, as_string=True)
         self._picture_display.disabled = True
 
         layout.add_widget(self._picture_display)
