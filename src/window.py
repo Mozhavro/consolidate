@@ -11,9 +11,10 @@ from asciimatics.exceptions import ResizeScreenError, StopApplication
 
 
 class Window:
-    def __init__(self, picture=None, additional_scenes=None):
+    def __init__(self, model=None, picture=None, additional_scenes=None):
         self._additional_scenes = additional_scenes
         self._picture = picture
+        self._model = model
 
     def start(self):
         while True:
@@ -25,7 +26,7 @@ class Window:
 
     def play_scenes(self, screen):
         scenes = [
-            Scene([GameFrame(screen, self._picture)], -1, name="Controls"),
+            Scene([GameFrame(screen, self._model, self._picture)], -1, name="Controls"),
         ]
         if self._additional_scenes: scenes += self._additional_scenes
         
@@ -34,7 +35,7 @@ class Window:
 
 
 class GameFrame(Frame):
-    def __init__(self, screen, picture=''):
+    def __init__(self, screen, model, picture=''):
         super(GameFrame, self).__init__(screen,
                                         screen.height,
                                         screen.width)

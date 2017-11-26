@@ -1,4 +1,5 @@
 from .window import Window
+from .config import Config
 
 
 class Game:
@@ -31,8 +32,14 @@ class Game:
         """
         dialog ="Hello, world!"
 
-        window = Window(screen)
+
+        config = Config()
+        game_model = GameModel(config)
+        window = Window(game_model, screen)
         window.start()
-        # window = Window(screen, dialog)
-        # window.render()
         
+
+class GameModel:
+    def __init__(self, config):
+        self._partner_name = config.partner_name
+        self._statement = 1
