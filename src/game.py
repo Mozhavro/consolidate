@@ -1,5 +1,6 @@
 from .window import Window
-from .config import Config
+from .dialog import Dialog
+from . import config
 
 
 class Game:
@@ -32,8 +33,6 @@ class Game:
         """
         dialog ="Hello, world!"
 
-
-        config = Config()
         game_model = GameModel(config)
         window = Window(game_model, screen)
         window.start()
@@ -41,5 +40,8 @@ class Game:
 
 class GameModel:
     def __init__(self, config):
-        self._partner_name = config.partner_name
+        self._partner_name = config.NAME
         self._statement = 1
+
+    def get_statement(id):
+        pass

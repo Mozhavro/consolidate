@@ -1,21 +1,9 @@
-import json
 import os
 
 
-class Config:
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-    def __init__(self, path=None):
-        base_dir = os.path.dirname(os.path.dirname(__file__))
-        self.path = path or os.path.join(base_dir, "res/config.json")
-        self._conf = self.load(self.path)
+NAME = "hanna"
 
-    def load(self, path):
-        with open(path) as config_file:
-            conf = json.load(config_file)
-            return conf
-
-    def __getattr__(self, instance, owner=None):
-        return self.__dict__["_conf"][instance]
-
-    # def __set__(self, instanse, value):
-    #     self._conf[instanse] = value
+SCENES_DIR = os.path.join(BASE_DIR, "res/scenes")
+DIALOG = os.path.join(BASE_DIR, "res/dialog/{name}.json".format(name=NAME))
