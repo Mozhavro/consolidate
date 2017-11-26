@@ -44,8 +44,6 @@ class GameFrame(Frame):
                                         title="AGIRL",
                                         x=x, y=y)
 
-        # os.system("mode con cols=30") # TODO move value to config
-        # os.system("mode con lines=50") # TODO move value to config
         self._picture = picture
 
         self.palette = defaultdict(
@@ -62,28 +60,14 @@ class GameFrame(Frame):
             [('1. wup', 1), ('2.dup', 2)],
             name="answer_options",
             on_change=self._on_pick)
-        self._answer_options.palette = defaultdict(lambda: (Screen.COLOUR_RED, Screen.A_NORMAL, Screen.COLOUR_GREEN))
 
         self._picture_display = TextBox(14, as_string=True)
-        # self._picture.palette = (Screen.COLOUR_RED, Screen.A_NORMAL, Screen.COLOUR_GREEN)
         self._picture_display.disabled = True
-        # self._picture = Text()
-        # # self._picture._value = picture
-        # self.reset()
-
-        # import pudb; pudb.set_trace()
 
         layout.add_widget(self._picture_display)
         layout.add_widget(self._answer_options)
         layout.add_widget(
                 Label("Press `q` to quit."))
-
-
-        self.canvas.print_at(
-            picture,
-            0, #self.canvas._x, #+ self.canvas._offset,
-            0, #self.canvas._y,
-            Screen.COLOUR_BLACK, Screen.A_BOLD, Screen.COLOUR_WHITE)
         
         self.fix()
         self._on_pick()
@@ -116,57 +100,3 @@ class GameFrame(Frame):
     @staticmethod
     def _quit():
         raise StopApplication("User pressed quit")
-
-
-# class Window:
-#     """
-#     Representation of game screen.
-#     Consists of a scene picture frame and dialog
-#     """
-
-#     def __init__(self, screen, dialog):
-#         self.screen = screen
-#         self.dialog = dialog
-#         while True:
-#             try:
-#                 Screen.wrapper(self.scrn, arguments=[None])
-#             except ResizeScreenError:
-#                 pass
-
-#     def scrn(self, screen, scene):
-#         # frame = Frame(screen, screen.height * 2 // 3, screen.width * 2 // 3, has_border=True, title="AGIRL")
-#         frame = Frame(screen, 100, 100, has_border=True, title="AGIRL")
-#         layout = layout = Layout([100], fill_frame=True)
-#         frame.add_layout(layout)
-#         layout.add_widget(Text("Name:", "name"))
-#         scenes = [
-#             Scene([frame], -1, name="Main"),
-#             Scene([frame], -1, name="Main")
-#         ]
-
-#         screen.play(scenes, stop_on_resize=True, start_scene=scene)
-        
-
-#     def update(self, frame=None, dialog=None):
-#         if frame: self.frame = frame
-#         if dialog: self.dialog = dialog
-#         self.render()
-
-#     def render(self):
-#         self.render_screen()
-#         self.render_dialog()
-
-#     def render_screen(self):
-#         self.stdscr.addstr(0, 0, self.screen)
-#         self.stdscr.refresh()
-
-#     def render_dialog(self):
-#         print(self.dialog)
-
-#     # def teardown(self):
-#     #     # reverse everything that you changed about the terminal
-#     #     nocbreak()
-#     #     self.stdscr.keypad(False)
-#     #     echo()
-#     #     # restore the terminal to its original state
-#     #     endwin()
