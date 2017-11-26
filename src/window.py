@@ -4,6 +4,8 @@ from collections import defaultdict
 from asciimatics.scene import Scene
 from asciimatics.screen import Screen
 from asciimatics.widgets import Frame, Text, Layout, ListBox, Widget, Button, Label, TextBox
+from asciimatics.effects import Print
+from asciimatics.renderers import StaticRenderer
 from asciimatics.exceptions import ResizeScreenError, StopApplication
 
 
@@ -22,7 +24,8 @@ class Window:
 
     def play_scenes(self, screen):
         scenes = [
-            Scene([GameFrame(screen, self._picture)], -1, name="Main"),
+            Scene([GameFrame(screen, self._picture, x=0, y=0)], -1, name="Controls"),
+            # Scene([Print(screen, StaticRenderer(images=[self._picture]), 0)], name="Picture"),
         ]
         if self._additional_scenes: scenes += self._additional_scenes
         
@@ -31,13 +34,18 @@ class Window:
 
 
 class GameFrame(Frame):
-    def __init__(self, screen, picture=''):
+    def __init__(self, screen, picture='', x=None, y=None):
         super(GameFrame, self).__init__(screen,
                                         screen.height,
                                         screen.width,
                                         # on_load=self._reload_list,
                                         hover_focus=True,
-                                        title="AGIRL")
+                                        title="AGIRL",
+                                        x=x, y=y)
+
+        # os.system("mode con cols=30") # TODO move value to config
+        # os.system("mode con lines=50") # TODO move value to config
+        self._picture = picture
 
         self.palette = defaultdict(
             lambda: (Screen.COLOUR_WHITE, Screen.A_NORMAL, Screen.COLOUR_BLACK))
@@ -45,7 +53,7 @@ class GameFrame(Frame):
             self.palette[key] = (Screen.COLOUR_BLACK, Screen.A_BOLD, Screen.COLOUR_WHITE)
         self.palette["title"] = (Screen.COLOUR_BLACK, Screen.A_NORMAL, Screen.COLOUR_WHITE)
 
-        layout = Layout([1,1,1,1], fill_frame=True)
+        layout = Layout([1,1,1,1], fill_frame=False)
         self.add_layout(layout)
 
         self._answer_options = ListBox(
@@ -53,17 +61,28 @@ class GameFrame(Frame):
             [('1. wup', 1), ('2.dup', 2)],
             name="answer_options",
             on_change=self._on_pick)
+        self._answer_options.palette = defaultdict(lambda: (Screen.COLOUR_RED, Screen.A_NORMAL, Screen.COLOUR_GREEN))
 
-        self._picture = TextBox(10)
-        self._picture.disabled = True
-        self._picture.value = picture
-        self.reset()
+        self._picture_display = TextBox(14, as_string=True)
+        # self._picture.palette = (Screen.COLOUR_RED, Screen.A_NORMAL, Screen.COLOUR_GREEN)
+        self._picture_display.disabled = True
+        # self._picture = Text()
+        # # self._picture._value = picture
+        # self.reset()
 
         # import pudb; pudb.set_trace()
 
-        layout.add_widget(self._picture)
+        layout.add_widget(self._picture_display)
         layout.add_widget(self._answer_options)
         layout.add_widget(Button("Quit", self._quit))
+
+
+        self.canvas.print_at(
+            picture,
+            0, #self.canvas._x, #+ self.canvas._offset,
+            0, #self.canvas._y,
+            Screen.COLOUR_BLACK, Screen.A_BOLD, Screen.COLOUR_WHITE)
+        
         self.fix()
         self._on_pick()
 
@@ -73,6 +92,14 @@ class GameFrame(Frame):
     @staticmethod
     def _quit():
         raise StopApplication("User pressed quit")
+
+    def _treceback(self):
+        import pudb; pudb.set_trace()
+
+    def _update(self, frame_no):
+        # Now redraw as normal
+        self._picture_display.value = self._picture
+        super(GameFrame, self)._update(frame_no)
 
 
 # class Window:
