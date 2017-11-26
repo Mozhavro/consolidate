@@ -97,9 +97,22 @@ class GameFrame(Frame):
         import pudb; pudb.set_trace()
 
     def _update(self, frame_no):
-        # Now redraw as normal
         self._picture_display.value = self._picture
+        
+        # Now redraw as normal
         super(GameFrame, self)._update(frame_no)
+
+    def process_event(self, event):
+        # Do the key handling for this Frame.
+        if isinstance(event, KeyboardEvent):
+            if event.key_code in [ord('q'), ord('Q'), Screen.ctrl("c")]:
+                raise StopApplication("User quit")
+
+            # Force a refresh for improved responsiveness
+            self._last_frame = 0
+
+        # Now pass on to lower levels for normal handling of the event.
+        return super(GameFrame, self).process_event(event)
 
 
 # class Window:
