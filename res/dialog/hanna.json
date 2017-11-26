@@ -1,7 +1,7 @@
 {
     "statements": [
         {
-            "id": 1,
+            "id": "1",
             "remark": "She sits at the stairs with some notebook and headphones on her head. You are come up to her and say:",
             "text": "",
             "emotion": "default",
@@ -25,7 +25,7 @@
             ]
         },
         {
-            "id": 2,
+            "id": "2",
             "remark": "",
             "text": "Hi!",
             "emotion": "default",
@@ -45,7 +45,7 @@
             ]
         },
         {
-            "id": 3,
+            "id": "3",
             "remark": "",
             "text": "What do you want from me?",
             "emotion": "annoyed",
