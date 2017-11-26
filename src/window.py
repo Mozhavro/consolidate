@@ -54,7 +54,7 @@ class GameFrame(Frame):
             self.palette[key] = (Screen.COLOUR_BLACK, Screen.A_BOLD, Screen.COLOUR_WHITE)
         self.palette["title"] = (Screen.COLOUR_BLACK, Screen.A_NORMAL, Screen.COLOUR_WHITE)
 
-        layout = Layout([1,1,1,1], fill_frame=True)
+        layout = Layout([100], fill_frame=True)
         self.add_layout(layout)
 
         self._answer_options = ListBox(
