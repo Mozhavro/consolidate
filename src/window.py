@@ -3,6 +3,7 @@ from collections import defaultdict
 
 from asciimatics.scene import Scene
 from asciimatics.screen import Screen
+from asciimatics.event import KeyboardEvent
 from asciimatics.widgets import Frame, Text, Layout, ListBox, Widget, Button, Label, TextBox
 from asciimatics.effects import Print
 from asciimatics.renderers import StaticRenderer
@@ -53,7 +54,7 @@ class GameFrame(Frame):
             self.palette[key] = (Screen.COLOUR_BLACK, Screen.A_BOLD, Screen.COLOUR_WHITE)
         self.palette["title"] = (Screen.COLOUR_BLACK, Screen.A_NORMAL, Screen.COLOUR_WHITE)
 
-        layout = Layout([1,1,1,1], fill_frame=False)
+        layout = Layout([1,1,1,1], fill_frame=True)
         self.add_layout(layout)
 
         self._answer_options = ListBox(
@@ -74,7 +75,8 @@ class GameFrame(Frame):
 
         layout.add_widget(self._picture_display)
         layout.add_widget(self._answer_options)
-        layout.add_widget(Button("Quit", self._quit))
+        layout.add_widget(
+                Label("Press `q` to quit."))
 
 
         self.canvas.print_at(
@@ -89,16 +91,12 @@ class GameFrame(Frame):
     def _on_pick(self):
         pass
 
-    @staticmethod
-    def _quit():
-        raise StopApplication("User pressed quit")
-
     def _treceback(self):
         import pudb; pudb.set_trace()
 
     def _update(self, frame_no):
         self._picture_display.value = self._picture
-        
+
         # Now redraw as normal
         super(GameFrame, self)._update(frame_no)
 
@@ -106,13 +104,18 @@ class GameFrame(Frame):
         # Do the key handling for this Frame.
         if isinstance(event, KeyboardEvent):
             if event.key_code in [ord('q'), ord('Q'), Screen.ctrl("c")]:
-                raise StopApplication("User quit")
+                self._quit()
 
             # Force a refresh for improved responsiveness
             self._last_frame = 0
 
         # Now pass on to lower levels for normal handling of the event.
         return super(GameFrame, self).process_event(event)
+
+
+    @staticmethod
+    def _quit():
+        raise StopApplication("User pressed quit")
 
 
 # class Window:
