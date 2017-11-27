@@ -1,5 +1,5 @@
 altgraph==0.14
-asciimatics==1.8.0
+asciimatics==1.8.1.dev74+g9eccca8
 future==0.16.0
 macholib==1.8
 olefile==0.44
