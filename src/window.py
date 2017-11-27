@@ -39,8 +39,9 @@ class GameFrame(Frame):
                                         screen.height,
                                         screen.width)
 
-        self._statement = model.get_statement(1)
-        self._picture = model.get_scene("start")
+        self._model = model
+        self._statement = self._model.get_statement(1)
+        self._picture = self._model.get_scene("start")
 
         self.palette = defaultdict(
             lambda: (Screen.COLOUR_WHITE, Screen.A_NORMAL, Screen.COLOUR_BLACK))
@@ -51,17 +52,12 @@ class GameFrame(Frame):
         layout = Layout([100], fill_frame=True)
         self.add_layout(layout)
 
-        answer_options = []
-        for key, answer in enumerate(self._statement["answers"], 1):
-            text = "{num}. {label}".format(num=key, label=answer["text"])
-            value = key
-            answer_options.append((text, value))
-
+        self._answer_options_list = self._format_options(self._statement["answers"])
         self._answer_options = ListBox(
             Widget.FILL_FRAME,
-            answer_options,
+            self._answer_options_list,
             name="answer_options",
-            on_change=self._on_pick)
+            on_select=self._on_select)
 
         self._picture_display = TextBox(16, as_string=True)
         self._picture_display.disabled = True
@@ -71,7 +67,9 @@ class GameFrame(Frame):
         self._remark.disabled = True
 
         self._statement_text = Text()
-        self._statement_text.value = self._statement['text']
+        self._statement_text.value = "{}: {}".format(self._model.partner_name,
+                                                     self._statement['text'])
+
         self._statement_text.disabled = True
 
         layout.add_widget(self._picture_display)
@@ -81,11 +79,21 @@ class GameFrame(Frame):
         layout.add_widget(
                 Label("Press `q` to quit."))
         
+        self._qsfdsf=1
         self.fix()
-        self._on_pick()
 
-    def _on_pick(self):
-        pass
+    def _on_select(self):
+        list_value = self._answer_options.value
+        answer = self._statement["answers"][list_value -1]
+        next_statement_id = answer["next_statement"]
+        self._statement = self._model.get_statement(next_statement_id)
+        self._picture = self._model.get_scene(self._statement["emotion"])
+        self._answer_options_list = self._format_options(self._statement["answers"])
+        self._answer_options = ListBox(
+            Widget.FILL_FRAME,
+            self._answer_options_list,
+            name="answer_options",
+            on_select=self._on_select)
 
     def _treceback(self):
         import pudb; pudb.set_trace()
@@ -93,7 +101,11 @@ class GameFrame(Frame):
     def _update(self, frame_no):
         self._picture_display.value = self._picture
         self._remark.value = self._statement['remark']
-        self._statement_text.value = self._statement['text']
+        if self._statement['text']:
+            self._statement_text.value = "{}: {}".format(self._model.partner_name,
+                                                         self._statement['text'])
+        else:
+            self._statement_text.value = ""
 
         # Now redraw as normal
         super(GameFrame, self)._update(frame_no)
@@ -109,6 +121,15 @@ class GameFrame(Frame):
 
         # Now pass on to lower levels for normal handling of the event.
         return super(GameFrame, self).process_event(event)
+
+    def _format_options(self, options):
+        answer_options = []
+        for key, option in enumerate(options, 1):
+            text = "{num}. {label}".format(num=key, label=option["text"])
+            value = key
+            answer_options.append((text, value))
+
+        return answer_options
 
 
     @staticmethod
