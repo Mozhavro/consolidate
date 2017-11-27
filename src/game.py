@@ -13,7 +13,7 @@ class Game:
 
 class GameModel:
     def __init__(self, config):
-        self.partner_name = config.NAME
+        self.partner_name = config.NAME.title()
         self._dialog = resources.load_dialog()
 
     def get_statement(self, id):
