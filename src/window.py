@@ -37,8 +37,7 @@ class GameFrame(Frame):
     def __init__(self, screen, model):
         super(GameFrame, self).__init__(screen,
                                         screen.height,
-                                        screen.width,
-                                        on_load=self._reload)
+                                        screen.width)
 
         self._model = model
         self._statement = self._model.get_statement(1)
@@ -53,10 +52,9 @@ class GameFrame(Frame):
         layout = Layout([100], fill_frame=True)
         self.add_layout(layout)
 
-        self._answer_options_list = self._format_options(self._statement["answers"])
         self._answer_options = ListBox(
             Widget.FILL_FRAME,
-            self._answer_options_list,
+            self._get_answers(),
             name="answer_options",
             on_select=self._on_select)
 
@@ -80,7 +78,6 @@ class GameFrame(Frame):
         layout.add_widget(
                 Label("Press `q` to quit."))
         
-        # self._qsfdsf=1
         self.fix()
 
     def _on_select(self):
@@ -89,15 +86,7 @@ class GameFrame(Frame):
         next_statement_id = answer["next_statement"]
         self._statement = self._model.get_statement(next_statement_id)
         self._picture = self._model.get_scene(self._statement["emotion"])
-        self._answer_options.options = self._format_options(self._statement["answers"])
-        # self._answer_options = ListBox(
-        #     Widget.FILL_FRAME,
-        #     self._answer_options_list,
-        #     name="answer_options",
-        #     on_select=self._on_select)
-
-    def _reload(self):
-        self._answer_options.options = self._format_options(self._statement["answers"])
+        self._answer_options.options = self._get_answers()
 
     def _treceback(self):
         import pudb; pudb.set_trace()
@@ -111,7 +100,6 @@ class GameFrame(Frame):
         else:
             self._statement_text.value = ""
 
-        # self._answer_options.options = self._format_options(self._statement["answers"])
         # Now redraw as normal
         super(GameFrame, self)._update(frame_no)
 
@@ -130,9 +118,9 @@ class GameFrame(Frame):
         # Now pass on to lower levels for normal handling of the event.
         return super(GameFrame, self).process_event(event)
 
-    def _format_options(self, options):
+    def _get_answers(self):
         answer_options = []
-        for key, option in enumerate(options, 1):
+        for key, option in enumerate(self._statement["answers"], 1):
             text = "{num}. {label}".format(num=key, label=option["text"])
             value = key
             answer_options.append((text, value))
