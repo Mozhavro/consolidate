@@ -37,7 +37,8 @@ class GameFrame(Frame):
     def __init__(self, screen, model):
         super(GameFrame, self).__init__(screen,
                                         screen.height,
-                                        screen.width)
+                                        screen.width,
+                                        on_load=self._reload)
 
         self._model = model
         self._statement = self._model.get_statement(1)
@@ -79,7 +80,7 @@ class GameFrame(Frame):
         layout.add_widget(
                 Label("Press `q` to quit."))
         
-        self._qsfdsf=1
+        # self._qsfdsf=1
         self.fix()
 
     def _on_select(self):
@@ -88,12 +89,15 @@ class GameFrame(Frame):
         next_statement_id = answer["next_statement"]
         self._statement = self._model.get_statement(next_statement_id)
         self._picture = self._model.get_scene(self._statement["emotion"])
-        self._answer_options_list = self._format_options(self._statement["answers"])
-        self._answer_options = ListBox(
-            Widget.FILL_FRAME,
-            self._answer_options_list,
-            name="answer_options",
-            on_select=self._on_select)
+        self._answer_options.options = self._format_options(self._statement["answers"])
+        # self._answer_options = ListBox(
+        #     Widget.FILL_FRAME,
+        #     self._answer_options_list,
+        #     name="answer_options",
+        #     on_select=self._on_select)
+
+    def _reload(self):
+        self._answer_options.options = self._format_options(self._statement["answers"])
 
     def _treceback(self):
         import pudb; pudb.set_trace()
@@ -107,6 +111,7 @@ class GameFrame(Frame):
         else:
             self._statement_text.value = ""
 
+        # self._answer_options.options = self._format_options(self._statement["answers"])
         # Now redraw as normal
         super(GameFrame, self)._update(frame_no)
 
@@ -115,6 +120,9 @@ class GameFrame(Frame):
         if isinstance(event, KeyboardEvent):
             if event.key_code in [ord('q'), ord('Q'), Screen.ctrl("c")]:
                 self._quit()
+
+            elif event.key_code in [ord('t'), ord('T')]:
+                self._treceback()
 
             # Force a refresh for improved responsiveness
             self._last_frame = 0
