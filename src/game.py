@@ -1,5 +1,4 @@
 from window import Window
-from dialog import Dialog
 import config
 import resources
 
