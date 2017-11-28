@@ -1,7 +1,7 @@
 import os
 import json
 
-from . import config
+import config
 
 
 def get_scene(title):

@@ -1,7 +1,7 @@
-from .window import Window
-from .dialog import Dialog
-from . import config
-from . import resources
+from window import Window
+from dialog import Dialog
+import config
+import resources
 
 
 class Game:

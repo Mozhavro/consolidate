@@ -2,7 +2,7 @@
 Make me executable.
 """
 
-from .game import Game
+from game import Game
 
 
 def main():
