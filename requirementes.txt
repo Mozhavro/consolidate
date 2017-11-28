@@ -1,5 +1,5 @@
 altgraph==0.14
-asciimatics==1.8.1.dev74+g9eccca8
+-e git://github.com/peterbrittain/asciimatics@9eccca85ea9eb19b83569090021b8425c5cac169#egg=asciimatics
 future==0.16.0
 macholib==1.8
 olefile==0.44
