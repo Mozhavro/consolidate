@@ -4,8 +4,7 @@ Console based ASCII date sim
 
 ![icon](res/icon.png)
 
-Made for GameOff gamedev contest on itch.io.
-For now it's not really a 
+Made for [GameOff](https://itch.io/jam/game-off-2017) gamedev contest.
 
 # todo
 
