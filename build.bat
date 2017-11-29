@@ -1,5 +1,5 @@
 pyinstaller -F --name="consolidate.exe" ^
-            --paths="src/" ^
+            --noupx --paths="src/" ^
             --log-level=DEBUG ^
             --add-data="res;res" ^
             ./src/main.py 
