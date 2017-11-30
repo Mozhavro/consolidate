@@ -6,6 +6,9 @@ Console based ASCII date sim
 
 Made for [GameOff](https://itch.io/jam/game-off-2017) gamedev contest.
 
+# customization
+You are free to alter the assets. You can change the entire dialog to your self written and replace all scenes. Navigate to `res/` folder and see. All scenes are just `.txt` files with ASCII arts. To change the dialog you should be able to deal with `JSON` format.
+
 # deploy/build
 1. Install requirements using pip. You probably want to use [virtualenv](https://virtualenv.pypa.io/en/stable/).
 
