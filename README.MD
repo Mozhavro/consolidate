@@ -6,6 +6,14 @@ Console based ASCII date sim
 
 Made for [GameOff](https://itch.io/jam/game-off-2017) gamedev contest.
 
+# deploy/build
+1. Install requirements using pip. You probably want to use [virtualenv](https://virtualenv.pypa.io/en/stable/).
+
+`pip install -r requirements.txt`
+
+2. There is a build scripts to make an executable. `build.sh` for Unix based systems and `build.bat` for Windows. Windows executable requires `res` folder to be in the same directory. Linux build is fully standalone.
+
+
 # todo
 
 1. Refactoring!
