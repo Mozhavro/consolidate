@@ -83,7 +83,7 @@ class GameFrame(Frame):
         answer = self._statement["answers"][list_value -1]
         next_statement_id = answer["next_statement"]
         self._statement = self._model.get_statement(next_statement_id)
-        self._picture = self._model.get_scene(self._statement["emotion"])
+        self._picture = self._model.get_scene(self._statement["scene"])
         self._answer_options.options = self._get_answers()
 
     def _update(self, frame_no):
