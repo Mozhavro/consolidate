@@ -1,58 +1,278 @@
 {
     "1": {
-        "remark": "She sits at the stairs with some notebook and \nheadphones on her head. You are come up to her and say:",
+        "remark": "It's raining again... I love it...\nShe's just stands there. Maybe she's cold.",
         "text": "",
-        "emotion": "default",
+        "scene": "start",
         "answers": [
-            {
-                "text": "Hi!",
-                "next_statement": 2
-            },
             {
                 "text": "Hello there!",
                 "next_statement": 2
             },
             {
-                "text": "Hey, sweety!",
+                "text": "Hey!",
                 "next_statement": 3
             },
             {
-                "text": "Holy Moly! Be you angel?",
-                "next_statement": 3
+                "text": "Are you gonna just stay there?",
+                "next_statement": 4
             }
         ]
     },
     "2": {
         "remark": "",
         "text": "Hi!",
-        "emotion": "default",
+        "scene": "start",
         "answers": [
             {
-                "text": "My name is %username%",
-                "next_statement": 4
-            },
-            {
-                "text": "What is your name?",
+                "text": "Are you okay?",
                 "next_statement": 5
             },
             {
-                "text": "what are you listening?",
-                "next_statement": 6
+                "text": "Get cover!",
+                "next_statement": 9
             }
         ]
     },
     "3": {
         "remark": "",
-        "text": "What do you want from me?",
-        "emotion": "annoyed",
+        "text": "Hmm?",
+        "scene": "start",
         "answers": [
             {
-                "text": "Sorry, I didn't mean it like that. I'm %username%.",
-                "next_statement": 4
+                "text": "Are you okay?",
+                "next_statement": 5
+            },
+            {
+                "text": "Get cover!",
+                "next_statement": 9
+            }
+        ]
+    },
+    "4": {
+        "remark": "",
+        "text": "What do you want from me?",
+        "scene": "start",
+        "answers": [
+            {
+                "text": "Sorry, I didn't mean it that way. Just worried about you...",
+                "next_statement": 5
             },
             {
                 "text": "Hey, chill bae",
+                "next_statement": 6
+            }
+        ]
+    },
+    "5": {
+        "remark": "",
+        "text": "I'm fine, thanks...",
+        "scene": "start",
+        "answers": [
+            {
+                "text": "Okay then...",
+                "next_statement": 8
+            },
+            {
+                "text": "Get inside!",
+                "next_statement": 9
+            }
+        ]
+    }, 
+    "6": {
+        "remark": "",
+        "text": "Good bye...",
+        "scene": "start",
+        "answers": [
+            {
+                "text": "...",
                 "next_statement": 7
+            }
+        ]
+    },
+    "7": {
+        "remark": "She walks away...",
+        "text": "",
+        "scene": "empty_street",
+        "answers": [
+            {
+                "text": "Retry",
+                "next_statement": 1
+            },
+            {
+                "text": "Quit",
+                "next_statement": -1
+            }
+        ]
+    },
+    "8": {
+        "remark": "",
+        "text": "...",
+        "scene": "start",
+        "answers": [
+            {
+                "text": "Retry",
+                "next_statement": 1
+            },
+            {
+                "text": "Quit",
+                "next_statement": -1
+            }
+        ]
+    },
+    "9": {
+        "remark": "",
+        "text": "Why should I?",
+        "scene": "start",
+        "answers": [
+            {
+                "text": "Are you serious? It's raining there! Yo'll get sick!",
+                "next_statement": 10
+            },
+            {
+                "text": "'Cuz there are some tea and sandwiches in here!",
+                "next_statement": 11
+            }
+        ]
+    },
+    "10": {
+        "remark": "",
+        "text": "I LOVE rain.",
+        "scene": "start",
+        "answers": [
+            {
+                "text": "Okay then...",
+                "next_statement": 8
+            },
+            {
+                "text": "Well, me too. Maybe I should go outside then...",
+                "next_statement": 15
+            }
+        ]
+    },
+    "11": {
+        "remark": "",
+        "text": "Well, that's a good reason...",
+        "scene": "start",
+        "answers": [
+            {
+                "text": "...",
+                "next_statement": 12
+            }
+        ]
+    },
+    "12": {
+        "remark": "She comes in...",
+        "text": "My name is Hanna.",
+        "scene": "neutral",
+        "answers": [
+            {
+                "text": "Nice to meet you, Hanna.",
+                "next_statement": 13
+            },
+            {
+                "text": "Wait here for a second. [Run away]",
+                "next_statement": 19
+            }
+        ]
+    },
+    "13": {
+        "remark": "To be continued...",
+        "text": "My name is Hanna.",
+        "scene": "neutral",
+        "answers": [
+            {
+                "text": "Retry",
+                "next_statement": 1
+            },
+            {
+                "text": "Quit",
+                "next_statement": -1
+            }
+        ]
+    },
+    "15": {
+        "remark": "",
+        "text": "Isn't it glorious out here?",
+        "scene": "happy",
+        "answers": [
+            {
+                "text": "Yeah, you're right. Can I take a picture of you?",
+                "next_statement": 16
+            },
+            {
+                "text": "Nah, not really. I don't like rain actually. I just wanted to seem cool.",
+                "next_statement": 17
+            }
+        ]
+    },
+    "16": {
+        "remark": "",
+        "text": "Huh? Why?",
+        "scene": "neutral",
+        "answers": [
+            {
+                "text": "Because it's beautiful. And you're beautiful. I want to capture this moment.",
+                "next_statement": 20
+            },
+            {
+                "text": "[Run away as fast as can]",
+                "next_statement": 19
+            }
+        ]
+    },
+    "17": {
+        "remark": "",
+        "text": "Well, thanks for honesty.",
+        "scene": "neutral",
+        "answers": [
+            {
+                "text": "Let's go inside!",
+                "next_statement": 18
+            },
+            {
+                "text": "[Run away as fast as can]",
+                "next_statement": 19
+            }
+        ]
+    },
+    "18": {
+        "remark": "",
+        "text": "Fiiine...",
+        "scene": "neutral",
+        "answers": [
+            {
+                "text": "...",
+                "next_statement": 12
+            }
+        ]
+    },
+    "19": {
+        "remark": "Well... f**k!",
+        "text": "...",
+        "scene": "empty_street",
+        "answers": [
+            {
+                "text": "Retry",
+                "next_statement": 1
+            },
+            {
+                "text": "Quit",
+                "next_statement": -1
+            }
+        ]
+    },
+    "20": {
+        "remark": "To be continued...",
+        "text": "Okay!",
+        "scene": "camera",
+        "answers": [
+            {
+                "text": "Retry",
+                "next_statement": 1
+            },
+            {
+                "text": "Quit",
+                "next_statement": -1
             }
         ]
     }
