@@ -23,3 +23,4 @@ You are free to alter the assets. You can change the entire dialog to your self 
 2. Ability to set player name.
 3. Ability to choose partner.
 4. Pack resources apart from executable, so there is an ability to alter them (dialogs, scenes).
+5. Change dialog resource format from JSON to YAML (?)
